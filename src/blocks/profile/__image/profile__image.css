@@ -1,0 +1,8 @@
+.profile__image {
+    display: block;
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    transition: opacity .3s ease;
+    cursor: pointer;
+}

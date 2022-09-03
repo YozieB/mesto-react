@@ -1,0 +1,22 @@
+.profile {
+    padding: 40px 20px 50px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    gap: 0 30px;
+}
+
+@media(max-width: 690px) {
+    .profile {
+        gap: 0 15px;
+    }
+}
+
+@media(max-width: 650px) {
+    .profile {
+        flex-direction: column;
+        gap: 0;
+        text-align: center;
+        padding: 40px 20px 35px;
+    }
+}

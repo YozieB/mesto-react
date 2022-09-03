@@ -1,0 +1,13 @@
+.popup__form-field {
+    position: relative;
+    display: block;
+}
+
+.popup__form-field:not(:first-child) {
+    margin-top: 32px;
+}
+
+.popup__form-field:last-of-type {
+    margin-bottom: 48px;
+}
+

@@ -1,0 +1,23 @@
+.profile__image-wrapper {
+    position: relative;
+    border-radius: 50%;
+}
+
+.profile__image-wrapper:hover::before{
+    opacity: 1;
+}
+
+.profile__image-wrapper::before {
+    content:'';
+    position: absolute;
+    width: 100%;
+    border-radius: 50%;
+    height: 100%;
+    background-image: url(../../../images/edit-avatar.svg);
+    background-color: rgba(0, 0, 0, 0.8);
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity .3s ease;
+    cursor: pointer;
+}
