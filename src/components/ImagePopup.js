@@ -1,6 +1,6 @@
 export default function ImagePopup(props) {
   return (
-    <div className={'popup image-popup' + (props.card ? ' popup_opened' : '')}>
+    <div className={`popup image-popup ${props.card ? 'popup_opened' : ''}`}>
       <div className='popup__container popup__container_image'>
         <button
           type='button'
