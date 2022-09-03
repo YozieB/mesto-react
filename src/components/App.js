@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import Footer from './Footer'
 import Header from './Header'
 import ImagePopup from './ImagePopup'
@@ -7,11 +7,10 @@ import PopupWithForm from './PopupWithForm'
 
 function App() {
   document.body.classList.add('page')
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
-    React.useState(false)
-  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
-  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false)
-  const [selectedCard, setSelectedCard] = React.useState(false)
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false)
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false)
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false)
+  const [selectedCard, setSelectedCard] = useState(null)
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true)
   }
@@ -25,7 +24,7 @@ function App() {
     setEditAvatarPopupOpen(false)
     setEditProfilePopupOpen(false)
     setAddPlacePopupOpen(false)
-    setSelectedCard(false)
+    setSelectedCard(null)
   }
   function handleCardClick(card) {
     setSelectedCard(card)
@@ -46,6 +45,7 @@ function App() {
         title='Новое место'
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
+        buttonText={'Создать'}
       >
         <label htmlFor='#' className='popup__form-field'>
           <input
@@ -71,9 +71,6 @@ function App() {
           />
           <span className='popup__input-link-error popup__error'></span>
         </label>
-        <button className='popup__form-btn' type='submit'>
-          Создать
-        </button>
       </PopupWithForm>
       <PopupWithForm
         name='profile-popup'
@@ -81,6 +78,7 @@ function App() {
         title='Редактировать профиль'
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
+        buttonText={'Сохранить'}
       >
         <label className='popup__form-field' htmlFor='#'>
           <input
@@ -108,9 +106,6 @@ function App() {
           />
           <span className='popup__input-job-error popup__error'></span>
         </label>
-        <button className='popup__form-btn' type='submit'>
-          Сохранить
-        </button>
       </PopupWithForm>
       <PopupWithForm
         name='avatar-popup'
@@ -118,6 +113,7 @@ function App() {
         title='Обновить аватар'
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
+        buttonText={'Сохранить'}
       >
         <label htmlFor='#' className='popup__form-field'>
           <input
@@ -130,15 +126,13 @@ function App() {
           />
           <span className='popup__input-avatar-link-error popup__error'></span>
         </label>
-        <button className='popup__form-btn' type='submit'>
-          Сохранить
-        </button>
       </PopupWithForm>
-      <PopupWithForm name='remove-popup' form='#' title='Вы уверены?'>
-        <button className='popup__form-btn popup__remove-btn' type='submit'>
-          Да
-        </button>
-      </PopupWithForm>
+      <PopupWithForm
+        name='remove-popup'
+        form='#'
+        title='Вы уверены?'
+        buttonText={'Да'}
+      />
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </>
   )

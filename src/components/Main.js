@@ -1,29 +1,37 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { api } from '../utils/api'
 import Card from './Card'
 
-export default function Main(props) {
-  const [userName, setUserName] = React.useState(undefined)
-  const [userDescription, setUserDescription] = React.useState(undefined)
-  const [userAvatar, setUserAvatar] = React.useState(undefined)
-  const [cards, setInitialCards] = React.useState([])
-  React.useEffect(() => {
-    api.getUserInfo().then(user => {
-      setUserName(user.name)
-      setUserDescription(user.about)
-      setUserAvatar(user.avatar)
-    })
-    api.getInitialCards().then(card => {
-      setInitialCards(card)
-    })
+export default function Main({
+  onEditAvatar,
+  onEditProfile,
+  onAddPlace,
+  onCardClick,
+}) {
+  const [userName, setUserName] = useState('')
+  const [userDescription, setUserDescription] = useState('')
+  const [userAvatar, setUserAvatar] = useState('')
+  const [cards, setInitialCards] = useState([])
+  useEffect(() => {
+    api
+      .getUserInfo()
+      .then(user => {
+        setUserName(user.name)
+        setUserDescription(user.about)
+        setUserAvatar(user.avatar)
+      })
+      .catch(error => console.log(`Error: ${error}`))
+    api
+      .getInitialCards()
+      .then(card => {
+        setInitialCards(card)
+      })
+      .catch(error => console.log(`Error: ${error}`))
   }, [])
   return (
     <main>
       <section className='container profile'>
-        <picture
-          className='profile__image-wrapper'
-          onClick={props.onEditAvatar}
-        >
+        <picture className='profile__image-wrapper' onClick={onEditAvatar}>
           <img
             className='image profile__image'
             src={`${userAvatar}`}
@@ -36,7 +44,7 @@ export default function Main(props) {
             <button
               type='button'
               className='profile__edit-btn'
-              onClick={props.onEditProfile}
+              onClick={onEditProfile}
             ></button>
           </div>
           <p className='profile__about'>{userDescription}</p>
@@ -44,12 +52,12 @@ export default function Main(props) {
         <button
           type='button'
           className='profile__add-btn'
-          onClick={props.onAddPlace}
+          onClick={onAddPlace}
         ></button>
       </section>
       <section className='container gallery'>
-        {cards.map((card, i) => (
-          <Card key={i} card={card} onCardClick={props.onCardClick} />
+        {cards.map(card => (
+          <Card key={card._id} card={card} onCardClick={onCardClick} />
         ))}
       </section>
     </main>
