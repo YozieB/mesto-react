@@ -1,4 +1,4 @@
-/* export default */ class Api {
+class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl
     this._headers = options.headers
@@ -43,6 +43,14 @@
       method: 'DELETE',
       headers: this._headers,
     }).then(this._getResponse)
+  }
+
+  changeLikeCardStatus(id, isLiked) {
+    if (isLiked) {
+      return this.like(id)
+    } else {
+      return this.dislike(id)
+    }
   }
 
   like(id) {
