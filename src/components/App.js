@@ -30,7 +30,6 @@ function App() {
       .getInitialCards()
       .then(card => {
         setInitialCards(card)
-        console.log(card)
       })
       .catch(error => console.log(`Error: ${error}`))
   }, [])
@@ -53,16 +52,22 @@ function App() {
     setSelectedCard(card)
   }
   function handleUpdateUser(user) {
-    api.setUserInfo(user.name, user.about).then(result => {
-      setCurrentUser(result)
-      closeAllPopups()
-    })
+    api
+      .setUserInfo(user.name, user.about)
+      .then(result => {
+        setCurrentUser(result)
+        closeAllPopups()
+      })
+      .catch(error => console.log(`Error: ${error}`))
   }
   function handleUpdateAvatar(avatar) {
-    api.updateAvatar(avatar.avatar).then(result => {
-      setCurrentUser(result)
-      closeAllPopups()
-    })
+    api
+      .updateAvatar(avatar.avatar)
+      .then(result => {
+        setCurrentUser(result)
+        closeAllPopups()
+      })
+      .catch(error => console.log(`Error: ${error}`))
   }
 
   function handleCardLike(card) {
@@ -71,22 +76,27 @@ function App() {
     api.changeLikeCardStatus(card._id, !isLiked).then(newCard => {
       setInitialCards(state =>
         state.map(c => (c._id === card._id ? newCard : c))
-      )
+      ).catch(error => console.log(`Error: ${error}`))
     })
   }
 
   function handleCardDelete(card) {
-    api.removeCard(card._id).then(() => {
-      setInitialCards(state => state.filter(c => c._id !== card._id))
-    })
+    api
+      .removeCard(card._id)
+      .then(() => {
+        setInitialCards(state => state.filter(c => c._id !== card._id))
+      })
+      .catch(error => console.log(`Error: ${error}`))
   }
 
   function handleAddPlaceSubmit(card) {
-    api.addCard(card.name, card.link).then(card => {
-      console.log(card)
-      setInitialCards([card, ...cards])
-      closeAllPopups()
-    })
+    api
+      .addCard(card.name, card.link)
+      .then(card => {
+        setInitialCards([card, ...cards])
+        closeAllPopups()
+      })
+      .catch(error => console.log(`Error: ${error}`))
   }
 
   return (
