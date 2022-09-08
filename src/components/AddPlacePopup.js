@@ -1,6 +1,11 @@
 import PopupWithForm from './PopupWithForm'
 import { useState, useEffect } from 'react'
-export default function AddPlacePopup({ isOpen, onClose, onAddCardPlace }) {
+export default function AddPlacePopup({
+  isOpen,
+  onClose,
+  onAddCardPlace,
+  buttonText,
+}) {
   const [cardName, setCardName] = useState('')
   const [cardLink, setCardLink] = useState('')
   function handleChangeCardName(e) {
@@ -27,7 +32,7 @@ export default function AddPlacePopup({ isOpen, onClose, onAddCardPlace }) {
       title='Новое место'
       isOpen={isOpen}
       onClose={onClose}
-      buttonText={'Создать'}
+      buttonText={buttonText}
       onSubmit={handleSubmit}
     >
       <label htmlFor='#' className='popup__form-field'>

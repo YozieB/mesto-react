@@ -10,29 +10,37 @@ export default function Main({
   onCardDelete,
   onCardLike,
   cards,
+  onLoad,
 }) {
   const currentUser = useContext(CurrentUserContext)
-
   return (
     <main>
       <section className='container profile'>
-        <picture className='profile__image-wrapper' onClick={onEditAvatar}>
-          <img
-            className='image profile__image'
-            src={`${currentUser.avatar}`}
-            alt='Пользователь'
-          />
-        </picture>
+        {onLoad ? (
+          <div className='loader'></div>
+        ) : (
+          <picture className='profile__image-wrapper' onClick={onEditAvatar}>
+            <img
+              className='image profile__image'
+              src={`${currentUser.avatar}`}
+              alt='Пользователь'
+            />
+          </picture>
+        )}
         <div className='profile__info'>
           <div className='profile__name'>
-            <h1 className='profile__title'>{currentUser.name}</h1>
+            <h1 className='profile__title'>
+              {onLoad ? 'Загрузка...' : `${currentUser.name}`}
+            </h1>
             <button
               type='button'
               className='profile__edit-btn'
               onClick={onEditProfile}
             ></button>
           </div>
-          <p className='profile__about'>{currentUser.about}</p>
+          <p className='profile__about'>
+            {onLoad ? 'Загрузка...' : `${currentUser.about}`}
+          </p>
         </div>
         <button
           type='button'
@@ -46,7 +54,6 @@ export default function Main({
             key={card._id}
             card={card}
             onCardClick={onCardClick}
-            currentUser={currentUser}
             onCardLike={onCardLike}
             onCardDelete={onCardDelete}
           />

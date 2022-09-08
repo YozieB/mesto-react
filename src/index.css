@@ -40,3 +40,4 @@
 @import url(./blocks/card/__likes/card__likes.css);
 @import url(./blocks/card/__like-counter/card__like-counter.css);
 @import url(./blocks/profile/__image-wrapper/profile__image-wrapper.css);
+@import url(./blocks/loader/loader.css)
