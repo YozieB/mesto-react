@@ -57,10 +57,10 @@ function App() {
     }
     if (isOpen) {
       document.addEventListener('keydown', closeByEscape)
-      document.addEventListener('click', closeByClickOutside)
+      document.addEventListener('mousedown', closeByClickOutside)
       return () => {
         document.removeEventListener('keydown', closeByEscape)
-        document.removeEventListener('click', closeByClickOutside)
+        document.removeEventListener('mousedown', closeByClickOutside)
       }
     }
   }, [isOpen])
