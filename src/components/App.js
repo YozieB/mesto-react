@@ -50,10 +50,17 @@ function App() {
         closeAllPopups()
       }
     }
+    function closeByClickOutside(evt) {
+      if (evt.target.classList.contains('popup_opened')) {
+        closeAllPopups()
+      }
+    }
     if (isOpen) {
       document.addEventListener('keydown', closeByEscape)
+      document.addEventListener('click', closeByClickOutside)
       return () => {
         document.removeEventListener('keydown', closeByEscape)
+        document.removeEventListener('click', closeByClickOutside)
       }
     }
   }, [isOpen])
